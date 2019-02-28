@@ -52,6 +52,7 @@ public class Main {
         Slide highestSlide2 = null;
         for (Slide slide1 : data.slides) {
             for (Slide slide2 : data.slides) {
+                if (slide1 == slide2) continue;
                 int common = calculateCommon(slide1, slide2);
                 if (common > highestCommon) {
                     highestCommon = common;
@@ -60,14 +61,17 @@ public class Main {
                 }
             }
         }
+        System.out.println(data.slides.size());
         data.slides.remove(highestSlide1);
         data.slides.remove(highestSlide2);
+        System.out.println(data.slides.size());
 
         LinkedList<Slide> result = new LinkedList<>();
         result.push(highestSlide1);
         result.push(highestSlide2);
 
         while (data.slides.size() > 0) {
+            System.out.println(data.slides.size());
             System.out.println("adding");
 
             int highestScore = 0;
