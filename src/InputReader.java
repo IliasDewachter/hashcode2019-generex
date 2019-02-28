@@ -17,6 +17,7 @@ public class InputReader {
         int tagId = 0;
 
         data.slides = new ArrayList<>();
+
         scanner.nextLine();
 
         int id = 0;
@@ -44,9 +45,6 @@ public class InputReader {
             id++;
         }
         scanner.close();
-
-
-
 
         return data;
     }

@@ -4,6 +4,7 @@ public class Slide {
 
     public String id;
     public int[] tags;
+    public double percentage = 0.0;
 
     public Slide(String id, int[] tags) {
         this.id = id;
