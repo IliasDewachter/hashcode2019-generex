@@ -26,5 +26,13 @@ public class Slide {
                 ", tags=" + Arrays.toString(tags) +
                 '}';
     }
+
+    @Override
+    public String toString() {
+        if (photo2 == null)
+            return String.valueOf(getPhoto1().getId());
+
+        return String.valueOf(getPhoto1().getId()) + " " + String.valueOf(getPhoto2().getId());
+    }
 }
 

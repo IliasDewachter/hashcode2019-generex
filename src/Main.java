@@ -14,5 +14,7 @@ public class Main {
         for (Slide verticalPhoto : data.verticalPhotos) {
             System.out.println(verticalPhoto);
         }
+
+
     }
 }
