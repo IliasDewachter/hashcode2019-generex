@@ -6,8 +6,13 @@ import java.util.Scanner;
 
 public class InputReader {
 
-    public static Photo[] readFile(String filename) throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File(filename));
+    public static Photo[] readFile(String filename) {
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(new File(filename));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         Photo[] photos = new Photo[scanner.nextInt()];
 
