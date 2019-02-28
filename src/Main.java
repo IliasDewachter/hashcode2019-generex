@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 public class Main {
 
     public static void main(String[] args) {
-        Data data = InputReader.readFile("input/c_memorable_moments.txt");
+        Data data = InputReader.readFile("input/b_lovely_landscapes.txt");
         //Data data = InputReader.readFile("input/a_example.txt");
 
         //combine all verticals to slides
@@ -17,7 +17,6 @@ public class Main {
             tagPercentages.put(entry.getKey(), entry.getValue() / totalTagCount);
         }
 
-
         double totalSlidePerc = 0.0;
         for (Slide slide : data.verticalPhotos) {
             for (int tag : slide.tags) {
@@ -26,7 +25,7 @@ public class Main {
             totalSlidePerc += slide.percentage;
         }
         List<Slide> sortedVerticals = data.verticalPhotos.stream().sorted((Comparator.comparingDouble(o -> o.percentage))).collect(Collectors.toList());
-        for (int i = 0; i < Math.floor(sortedVerticals.size()/2.0); i++) {
+        for (int i = 0; i < Math.floor(sortedVerticals.size() / 2.0); i++) {
             Slide firstSlide = sortedVerticals.get(i);
             Slide lastSlide = sortedVerticals.get(sortedVerticals.size() - i - 1);
 
@@ -50,16 +49,12 @@ public class Main {
 
         int highestCommon = 0;
         Slide highestSlide1 = null;
-        Slide highestSlide2 = null;
+        Slide highestSlide2 = data.slides.get(0);
         for (Slide slide1 : data.slides) {
-            for (Slide slide2 : data.slides) {
-                if (slide1 == slide2) continue;
-                int common = calculateCommon(slide1, slide2);
-                if (common > highestCommon) {
-                    highestCommon = common;
-                    highestSlide1 = slide1;
-                    highestSlide2 = slide2;
-                }
+            int common = calculateCommon(slide1, highestSlide2);
+            if (common > highestCommon) {
+                highestCommon = common;
+                highestSlide1 = slide1;
             }
         }
         data.slides.remove(highestSlide1);
