@@ -4,7 +4,8 @@ import java.util.stream.Collectors;
 public class Main {
 
     public static void main(String[] args) {
-        Data data = InputReader.readFile("input/a_example.txt");
+        Data data = InputReader.readFile("input/c_memorable_moments.txt");
+        //Data data = InputReader.readFile("input/a_example.txt");
 
         //combine all verticals to slides
         double totalTagCount = 0;
@@ -69,8 +70,9 @@ public class Main {
         result.push(highestSlide2);
 
         while (data.slides.size() > 0) {
+            System.out.println(data.slides.size());
 
-            int highestScore = 0;
+            int highestScore = -1;
             Slide highestSlide = null;
             boolean isStart = false;
             for (Slide slide : data.slides) {
