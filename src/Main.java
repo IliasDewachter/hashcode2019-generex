@@ -51,6 +51,7 @@ public class Main {
         Slide highestSlide1 = null;
         Slide highestSlide2 = data.slides.get(0);
         for (Slide slide1 : data.slides) {
+            if (slide1 == highestSlide2) continue;
             int common = calculateCommon(slide1, highestSlide2);
             if (common > highestCommon) {
                 highestCommon = common;
