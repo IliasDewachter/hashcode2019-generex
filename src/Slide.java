@@ -31,4 +31,12 @@ public class Slide {
     public void setPhoto2(Photo photo2) {
         this.photo2 = photo2;
     }
+
+    @Override
+    public String toString() {
+        if (photo2 == null)
+            return String.valueOf(getPhoto1().getId());
+
+        return String.valueOf(getPhoto1().getId()) + " " + String.valueOf(getPhoto2().getId());
+    }
 }

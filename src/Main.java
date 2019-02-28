@@ -5,5 +5,7 @@ public class Main {
         for (Photo photo : photos) {
             System.out.println(photo);
         }
+
+
     }
 }
