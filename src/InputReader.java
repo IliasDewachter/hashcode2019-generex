@@ -15,6 +15,7 @@ public class InputReader {
         }
 
         Photo[] photos = new Photo[scanner.nextInt()];
+        scanner.nextLine();
 
         int id = 0;
         while (scanner.hasNextLine()) {
@@ -23,9 +24,7 @@ public class InputReader {
             Orientation orientation = split[0].equals("H") ? Orientation.HORIZONTAL : Orientation.VERTICAL;
 
             String[] tags = new String[Integer.parseInt(split[1])];
-            for (int i = 0; i < tags.length; i++) {
-                tags[i] = split[i + 2];
-            }
+            if (tags.length >= 0) System.arraycopy(split, 2, tags, 0, tags.length);
 
             photos[id] = new Photo(id, orientation, tags);
             id++;

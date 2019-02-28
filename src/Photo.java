@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Photo {
 
     private long id;
@@ -33,4 +35,15 @@ public class Photo {
     public void setTags(String[] tags) {
         this.tags = tags;
     }
+
+
+    @Override
+    public String toString() {
+        return "Photo{" +
+                "id=" + id +
+                ", orientation=" + orientation +
+                ", tags=" + Arrays.toString(tags) +
+                '}';
+    }
 }
+
