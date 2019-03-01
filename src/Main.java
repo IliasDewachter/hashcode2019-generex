@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 public class Main {
 
     public static void main(String[] args) {
-        Data data = InputReader.readFile("input/b_lovely_landscapes.txt");
+        Data data = InputReader.readFile("input/e_shiny_selfies.txt");
         //Data data = InputReader.readFile("input/c_memorable_moments.txt");
         //Data data = InputReader.readFile("input/a_example.txt");
 
@@ -53,7 +53,7 @@ public class Main {
         Slide highestSlide2 = data.slides.get(0);
         for (Slide slide1 : data.slides) {
             if (slide1 == highestSlide2) continue;
-            int common = calculateCommon(slide1, highestSlide2);
+            int common = calculateScore(slide1, highestSlide2);
             if (common > highestCommon) {
                 highestCommon = common;
                 highestSlide1 = slide1;
@@ -116,14 +116,15 @@ public class Main {
     }
 
 
+    static Set<Integer> common = new HashSet<>();
     public static int calculateCommon(Slide slide1, Slide slide2) {
-        int common = 0;
+        common.clear();
         for (int tag : slide1.tags) {
             for (int innerTag : slide2.tags) {
-                if (tag == innerTag) common++;
+                if (tag == innerTag) common.add(tag);
             }
         }
-        return common;
+        return common.size();
     }
 
     public static int calculateScore(Slide slide1, Slide slide2, Slide slide3) {
