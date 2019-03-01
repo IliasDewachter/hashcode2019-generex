@@ -116,15 +116,14 @@ public class Main {
     }
 
 
-    static Set<Integer> common = new HashSet<>();
     public static int calculateCommon(Slide slide1, Slide slide2) {
-        common.clear();
+        int common = 0;
         for (int tag : slide1.tags) {
             for (int innerTag : slide2.tags) {
-                if (tag == innerTag) common.add(tag);
+                if (tag == innerTag) common++;
             }
         }
-        return common.size();
+        return common;
     }
 
     public static int calculateScore(Slide slide1, Slide slide2, Slide slide3) {
