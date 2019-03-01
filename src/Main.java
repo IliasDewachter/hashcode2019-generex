@@ -5,7 +5,7 @@ public class Main {
 
     public static void main(String[] args) {
         Data data = InputReader.readFile("input/b_lovely_landscapes.txt");
-        Random random = new Random();
+        //Data data = InputReader.readFile("input/c_memorable_moments.txt");
         //Data data = InputReader.readFile("input/a_example.txt");
 
         //combine all verticals to slides
@@ -61,37 +61,27 @@ public class Main {
         }
         data.slides.remove(highestSlide1);
         data.slides.remove(highestSlide2);
-
-        Slide s3 = data.slides.get(0);
-        data.slides.remove(s3);
-        Slide s4 = data.slides.get(0);
-        data.slides.remove(s4);
-
         LinkedList<Slide> result = new LinkedList<>();
         result.push(highestSlide1);
         result.push(highestSlide2);
-        result.push(s3);
-        result.push(s4);
 
         while (data.slides.size() > 0) {
-            System.out.println(data.slides.size());
+            if (data.slides.size() % 1000 == 0)
+                System.out.println(data.slides.size());
 
             int highestScore = -1;
             Slide highestSlide = null;
             boolean isStart = false;
+
+            Slide firstSlide = result.get(0);
+            Slide lastSlide = result.getLast();
+
             for (Slide slide : data.slides) {
 
                 //check start of snake
                 {
-                    Slide slide2 = result.get(0);
-                    Slide slide3 = result.get(1);
-                    Slide slide4 = result.get(2);
-                    Slide slide5 = result.get(3);
-                    int score = calculateScore(slide, slide2, slide3, slide4, slide5);
+                    int score = calculateScore(slide, firstSlide);
                     if (score > highestScore) {
-                        if (score >= 3) {
-                            break;
-                        }
                         highestScore = score;
                         highestSlide = slide;
                         isStart = true;
@@ -99,15 +89,8 @@ public class Main {
                 }
 
                 {
-                    Slide slide1 = result.get(result.size() - 4);
-                    Slide slide2 = result.get(result.size() - 3);
-                    Slide slide3 = result.get(result.size() - 2);
-                    Slide slide4 = result.getLast();
-                    int score = calculateScore(slide1, slide2, slide3, slide4, slide);
+                    int score = calculateScore(lastSlide, slide);
                     if (score > highestScore) {
-                        if (score >= 3) {
-                            break;
-                        }
                         highestScore = score;
                         highestSlide = slide;
                         isStart = false;
@@ -141,11 +124,10 @@ public class Main {
         return common;
     }
 
-    public static int calculateScore(Slide slide1, Slide slide2, Slide slide3, Slide slide4, Slide slide5) {
-        int common1 = calculateCommon(slide1, slide2);
-        int common2 = calculateCommon(slide2, slide3);
-        int common3 = calculateCommon(slide3, slide4);
-        int common4 = calculateCommon(slide4, slide5);
-        return Math.max(Math.min(common1, common2), Math.min(common3, common4));
+    public static int calculateScore(Slide slide1, Slide slide2) {
+        int common = calculateCommon(slide1, slide2);
+        int notCommon1 = slide1.tags.length - common;
+        int notCommon2 = slide2.tags.length - common;
+        return Math.min(Math.min(notCommon1, common), notCommon2);
     }
 }
